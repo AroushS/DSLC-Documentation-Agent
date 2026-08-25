@@ -20,7 +20,7 @@ Evidence may include:
 - project README;
 - modelling, training, validation or scoring notebooks;
 - EDA;
-- Use Case Shaping;
+- Use Case Shaping document 
 - Solution Design;
 - governance or approved business documentation.
 ---
