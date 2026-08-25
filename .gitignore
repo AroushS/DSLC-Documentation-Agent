@@ -1,0 +1,20 @@
+# DSLC Agent generated outputs
+stage1_draft.md
+
+# Generated output files
+output/*.docx
+output/*.pdf
+output/*.html
+output/*.json
+output/*_review.md
+
+# Keep the empty output folder in Git
+!output/.gitkeep
+
+# Python temporary files
+__pycache__/
+*.pyc
+
+# Operating system temporary files
+.DS_Store
+Thumbs.db

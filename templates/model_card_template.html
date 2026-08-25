@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>{{MODEL_NAME}} - Model Card</title>
+
+<style>
+
+@page {
+    size: A4 landscape;
+    margin: 8mm;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 14px;
+    background: #f4f5f7;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #333333;
+}
+
+.page {
+    width: 100%;
+    max-width: 1120px;
+    min-height: 740px;
+    margin: 0 auto;
+    padding: 8px;
+    background: white;
+    border-top: 8px solid transparent;
+    border-image:
+        linear-gradient(
+            90deg,
+            #ff9f1c,
+            #ff2f92,
+            #8b5cf6,
+            #19b5fe
+        ) 1;
+}
+
+.header-card {
+    border: 2px solid #a7d8ef;
+    border-radius: 9px;
+    overflow: hidden;
+    margin-bottom: 8px;
+    background: #ffffff;
+}
+
+.header-title-row {
+    display: grid;
+    grid-template-columns: 115px 1fr;
+    min-height: 54px;
+    border-bottom: 1px solid #d3d3d3;
+}
+
+.header-grid {
+    display: grid;
+    grid-template-columns:
+        115px 1fr 95px 220px;
+}
+
+.label {
+    padding: 10px;
+    background: #f5f5f5;
+    border-right: 1px solid #d3d3d3;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.value {
+    padding: 10px 12px;
+    border-right: 1px solid #d3d3d3;
+    font-size: 13px;
+    font-style: italic;
+}
+
+.target-value {
+    font-style: normal;
+    line-height: 1.35;
+}
+
+.target-business {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.target-technical {
+    margin-top: 3px;
+    font-size: 11px;
+    color: #5f6b7a;
+}
+
+.title-value {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 14px;
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.pending {
+    color: #b42318;
+    font-weight: bold;
+    font-style: normal;
+}
+
+.main-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 8px;
+}
+
+.panel {
+    border: 2px solid #9dd5eb;
+    border-radius: 9px;
+    background: white;
+    padding: 12px;
+    box-shadow:
+        0 1px 3px
+        rgba(0, 0, 0, 0.12);
+}
+
+.feature-panel {
+    min-height: 555px;
+}
+
+.right-column {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 8px;
+    align-content: start;
+}
+
+.panel-title {
+    margin: 0 0 10px 0;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #555555;
+    font-size: 16px;
+    text-decoration: underline;
+}
+
+.explainability-meta {
+    margin-bottom: 12px;
+    padding: 10px;
+    border: 1px solid #d9e2ec;
+    border-radius: 6px;
+    background: #fafcff;
+    font-size: 12px;
+    line-height: 1.45;
+}
+
+.status-selected {
+    color: #1d6f42;
+    font-weight: bold;
+}
+
+.status-selection-required {
+    color: #9a3412;
+    font-weight: bold;
+}
+
+.status-pending {
+    color: #b42318;
+    font-weight: bold;
+}
+
+.options-list {
+    margin: 8px 0 0 0;
+    padding-left: 18px;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.explainability-image {
+    width: 100%;
+    max-height: 340px;
+    object-fit: contain;
+    border: 1px solid #e1e4e8;
+    border-radius: 6px;
+    background: #ffffff;
+    margin-bottom: 8px;
+}
+
+.explainability-caption {
+    color: #666666;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.explainability-empty-state {
+    max-width: 560px;
+    margin: 42px auto 0;
+    padding: 24px 28px;
+    border: 1px dashed #d0d5dd;
+    border-radius: 10px;
+    background: #f8fafc;
+    color: #344054;
+}
+
+.explainability-empty-state h3 {
+    margin: 0 0 10px;
+    font-size: 16px;
+}
+
+.explainability-empty-state p {
+    margin: 7px 0;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.explainability-empty-state ul {
+    margin: 10px 0;
+    padding-left: 22px;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.empty-state-note {
+    margin-top: 13px;
+    color: #b42318;
+    font-weight: bold;
+}
+
+.feature-row {
+    display: grid;
+    grid-template-columns:
+        260px 1fr 50px;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 9px;
+}
+
+.feature-name {
+    font-size: 12px;
+    text-align: right;
+    overflow-wrap: anywhere;
+}
+
+.bar-track {
+    height: 18px;
+    background: #e6e8eb;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.bar {
+    height: 100%;
+    background:
+        linear-gradient(
+            90deg,
+            #2d75a3,
+            #4d9ec9
+        );
+}
+
+.feature-score {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.stats-intro {
+    text-align: center;
+    color: #777777;
+    font-size: 12px;
+    line-height: 1.4;
+    margin: 0;
+}
+
+.score-circle {
+    width: 72px;
+    height: 72px;
+    margin: 7px auto;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    box-shadow:
+        0 3px 8px
+        rgba(0, 0, 0, 0.18);
+}
+
+.scale {
+    height: 18px;
+    border-radius: 3px;
+    background:
+        linear-gradient(
+            90deg,
+            #ffb000,
+            #ff2f92,
+            #9256e8,
+            #00b8d9
+        );
+    margin-top: 6px;
+}
+
+.scale-values,
+.scale-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: #555555;
+    margin-top: 4px;
+}
+
+.stats-note {
+    text-align: center;
+    font-size: 11px;
+    line-height: 1.35;
+}
+
+.stats-interpretation {
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.stats-disclaimer {
+    text-align: center;
+    font-size: 9px;
+    color: #6b7280;
+    line-height: 1.3;
+}
+
+.info-heading {
+    margin: 11px 0 4px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.info-text {
+    margin: 0;
+    color: #666666;
+    font-size: 12px;
+    line-height: 1.45;
+}
+
+.governance-strip {
+    margin-top: 8px;
+    padding: 10px 14px;
+    border: 2px solid #f0b44d;
+    border-radius: 8px;
+    background: #fff9ed;
+    font-size: 12px;
+}
+
+.governance-strip strong {
+    color: #7a4d00;
+}
+
+.footer {
+    margin-top: 7px;
+    text-align: right;
+    color: #777777;
+    font-size: 10px;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class="page">
+
+
+<section class="header-card">
+
+<div class="header-title-row">
+
+<div class="label">
+Model:
+</div>
+
+<div class="title-value">
+{{MODEL_NAME}}
+</div>
+
+</div>
+
+
+<div class="header-grid">
+
+<div class="label">
+Target:
+</div>
+
+<div class="value target-value">
+
+<div class="target-business {{TARGET_BUSINESS_CLASS}}">
+{{TARGET_BUSINESS_DESCRIPTION}}
+</div>
+
+<div class="target-technical">
+Technical reference:
+{{TARGET_TECHNICAL_REFERENCE}}
+</div>
+
+</div>
+
+
+<div class="label">
+Owner:
+</div>
+
+<div class="value {{OWNER_CLASS}}">
+{{OWNER}}
+</div>
+
+
+<div class="label">
+Eligibility:
+</div>
+
+<div class="value">
+{{ELIGIBILITY}}
+</div>
+
+
+<div class="label">
+Version:
+</div>
+
+<div class="value">
+{{VERSION}}
+</div>
+
+</div>
+
+</section>
+
+
+<section class="main-grid">
+
+
+<div class="panel feature-panel">
+
+<h2 class="panel-title">
+Explainability Evidence
+</h2>
+
+
+<div class="explainability-meta">
+
+<strong>Status:</strong>
+{{EXPLAINABILITY_STATUS}}
+
+<br>
+
+<strong>Selected evidence type:</strong>
+{{EXPLAINABILITY_TYPE}}
+
+<br>
+
+<strong>Evidence source:</strong>
+{{EXPLAINABILITY_SOURCE}}
+
+</div>
+
+
+<div>
+
+{{EXPLAINABILITY_VISUAL}}
+
+<p class="explainability-caption">
+{{EXPLAINABILITY_CAPTION}}
+</p>
+
+<div>
+{{EXPLAINABILITY_AVAILABLE_OPTIONS}}
+</div>
+
+{{EXPLAINABILITY_DETAILS}}
+
+</div>
+
+</div>
+
+
+<div class="right-column">
+
+
+<div class="panel">
+
+<h2 class="panel-title">
+Statistics Summary
+</h2>
+
+
+<p class="stats-intro">
+
+ROC AUC score – a metric that
+captures how well a model separates
+positive and negative classes.
+
+</p>
+
+
+<div
+class="score-circle"
+style="{{ROC_AUC_CIRCLE_STYLE}}">
+
+{{ROC_AUC_DISPLAY}}
+
+</div>
+
+
+<p class="stats-interpretation">
+
+{{ROC_AUC_INTERPRETATION}}
+
+</p>
+
+
+<div class="scale">
+</div>
+
+
+<div class="scale-values">
+
+<span>
+50%
+</span>
+
+<span>
+100%
+</span>
+
+</div>
+
+
+<div class="scale-labels">
+
+<span>
+Random
+</span>
+
+<span>
+Poor
+</span>
+
+<span>
+Fine
+</span>
+
+<span>
+Good
+</span>
+
+<span>
+Excellent
+</span>
+
+<span>
+Perfect
+</span>
+
+</div>
+
+
+<p class="stats-note">
+
+{{STATISTICS_NOTE}}
+
+</p>
+
+
+<p class="stats-disclaimer">
+
+Colour band is a visual interpretation
+aid only and not an automatic governance
+approval threshold.
+
+</p>
+
+</div>
+
+
+<div class="panel">
+
+<h2 class="panel-title">
+Additional Information
+</h2>
+
+
+<p class="info-heading">
+Model Type:
+</p>
+
+<p class="info-text">
+{{MODEL_TYPE}}
+</p>
+
+
+<p class="info-heading">
+Model Type Context:
+</p>
+
+<p class="info-text">
+{{MODEL_TYPE_CONTEXT}}
+</p>
+
+
+<p class="info-heading">
+Model Description:
+</p>
+
+<p class="info-text">
+{{MODEL_DESCRIPTION}}
+</p>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<section class="governance-strip">
+
+<strong>
+Review position:
+</strong>
+
+{{REVIEW_POSITION}}
+
+&nbsp; | &nbsp;
+
+<strong>
+Governance status:
+</strong>
+
+{{GOVERNANCE_STATUS}}
+
+</section>
+
+
+<div class="footer">
+
+Generated by the DSLC agent —
+evidence-based draft for
+human governance review.
+
+</div>
+
+
+</div>
+
+</body>
+
+</html>

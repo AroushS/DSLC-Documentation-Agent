@@ -1,0 +1,185 @@
+workflow:
+  name: Generate Model Card
+  version: "1.0"
+
+principles:
+  evidence_based: true
+  human_review_required: true
+  invent_missing_information: false
+  generated_model_card_is_project_evidence: false
+
+fields:
+
+  model_name:
+    required: true
+    preferred_sources:
+      - training_notebook
+      - model_configuration
+      - project_readme
+    missing_behaviour: PENDING
+
+  version:
+    required: false
+    preferred_sources:
+      - model_configuration
+      - training_notebook
+      - project_readme
+    missing_behaviour: PENDING
+
+  model_type:
+    required: true
+    preferred_sources:
+      - training_notebook
+      - implementation_code
+      - project_readme
+    missing_behaviour: PENDING
+
+  model_type_context:
+    required: false
+    missing_behaviour: PENDING
+
+  model_description:
+    required: true
+    preferred_sources:
+      - training_notebook
+      - implementation_code
+      - technical_design
+    missing_behaviour: PENDING
+
+  owner:
+    required: true
+    preferred_sources:
+      - use_case_shaping
+      - solution_design
+      - approved_business_documentation
+    technical_evidence_allowed: false
+    missing_behaviour: PENDING
+
+  target:
+    required: true
+    description: Technical target variable used by the model.
+    missing_behaviour: PENDING
+
+  target_business_description:
+    required: true
+    description: Business-language description of the prediction target.
+    approval_required: true
+    missing_behaviour: PENDING
+
+  eligibility:
+    required: true
+    preferred_sources:
+      - use_case_shaping
+      - solution_design
+      - approved_business_documentation
+    missing_behaviour: PENDING
+
+  roc_auc:
+    required: false
+    source_type: validation_evidence
+    training_metric_alone_sufficient: false
+    missing_behaviour: PENDING
+
+  statistics_note:
+    required: false
+    evidence_required: true
+    missing_behaviour: PENDING
+
+governance:
+
+  governance_status:
+    allowed_values:
+      - COMPLETE
+      - PENDING
+      - NOT APPLICABLE
+      - RISK ACCEPTED
+      - DRAFT
+
+  review_position:
+    description: >
+      Reader-facing summary of whether the Model Card is ready for governance review.
+      This is not a governance approval status.
+    allowed_values:
+      - DRAFT
+      - READY FOR REVIEW
+      - NOT READY FOR APPROVAL
+
+  rules:
+    - never infer approval from technical completion
+    - never infer risk acceptance
+    - never treat the generated Model Card as approval evidence
+    - review_position must not override governance status
+
+explainability:
+
+  accepted_types:
+    - shap_plot
+    - feature_importance_plot
+    - numeric_feature_importance_table
+    - user_graphic
+
+  selection_logic:
+    approved_user_selection_first: true
+    one_available_use_automatically: true
+    multiple_unapproved: SELECTION REQUIRED
+    none_available: PENDING
+
+  rules:
+    - never invent explainability values
+    - never use illustrative feature importance values
+    - numeric feature importance must be verified
+    - never rank SHAP above another valid artefact without an explicit selection rule
+
+roc_auc_interpretation:
+
+  bands:
+    - min: 0.00
+      max_exclusive: 0.60
+      label: Limited discrimination
+      colour: red
+
+    - min: 0.60
+      max_exclusive: 0.70
+      label: Moderate discrimination
+      colour: orange
+
+    - min: 0.70
+      max_exclusive: 0.80
+      label: Good discrimination
+      colour: purple
+
+    - min: 0.80
+      max_exclusive: 0.90
+      label: Strong discrimination
+      colour: blue
+
+    - min: 0.90
+      max_inclusive: 1.00
+      label: Excellent discrimination
+      colour: green
+
+  governance_note: >
+    ROC AUC colour bands are visual interpretation aids only
+    and are not automatic governance approval thresholds.
+
+data_contract:
+
+  required_keys:
+    - model_name
+    - version
+    - model_type
+    - target
+    - target_business_description
+    - target_business_description_approved
+    - eligibility
+    - owner
+    - roc_auc
+    - statistics_note
+    - model_type_context
+    - model_description
+    - governance_status
+    - review_position
+    - explainability
+    - evidence_summary
+    - missing_fields
+    - recommended_actions

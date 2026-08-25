@@ -1,0 +1,1072 @@
+# ============================================================
+# DSLC STAGE 1 — PROOF OF VALUE
+# Requirements source for the DSLC Stage 1 Documentation Agent
+#
+# PURPOSE OF THIS FILE:
+# - Define WHAT Stage 1 requires.
+# - Define whether requirements are required, optional or conditional.
+# - Define what evidence/content is expected.
+# - Provide reader-friendly labels for the generated document.
+#
+# THIS FILE MUST NOT:
+# - contain project-specific facts;
+# - contain approval decisions;
+# - control final document styling;
+# - be shown directly to business users.
+#
+# Final presentation rules belong in:
+# knowledge/output_standard.md
+# ============================================================
+
+
+dslc:
+  version: "2.0"
+
+  source_role: "requirements_source"
+
+  description: >
+    Machine-readable Stage 1 Proof of Value requirements used by the
+    DSLC Documentation Agent to assess project evidence and determine
+    which Stage 1 artefacts and governance checks must be represented.
+
+
+stage:
+  id: "stage_1"
+
+  name: "Proof of Value"
+
+  reader_label: "Stage 1 – Proof of Value"
+
+  purpose: >
+    Define the use case, assess data suitability, explore and prepare
+    the data, develop and validate the modelling approach, and collect
+    the evidence and reviews required to support completion of Stage 1.
+
+  blocking: true
+
+  completion_rule: >
+    Stage 1 cannot be considered complete until all applicable required
+    blocking requirements have sufficient supporting evidence and all
+    required approvals have been completed by the appropriate human
+    reviewers.
+
+  human_approval_required: true
+
+
+# ============================================================
+# STANDARD REQUIREMENT VALUES
+# ============================================================
+
+requirement_types:
+
+  document:
+    description: >
+      A required or supporting project artefact that should exist,
+      be generated as a draft, or be referenced as evidence.
+
+  governance_check:
+    description: >
+      A governance statement or checkpoint that requires supporting
+      evidence before it can be considered complete.
+
+
+requirement_status_types:
+
+  required:
+    description: >
+      Requirement applies to Stage 1 and must be addressed.
+
+  optional:
+    description: >
+      Artefact may be useful but is not mandatory unless organisational
+      guidance states otherwise.
+
+  conditional:
+    description: >
+      Requirement applies only when the stated condition is met.
+
+
+# ============================================================
+# STEP 1A — USE CASE SHAPING
+# ============================================================
+
+steps:
+
+  - id: "step_1a"
+
+    name: "Use Case Shaping"
+
+    reader_label: "Use Case Shaping"
+
+    purpose: >
+      Define the business problem, scope, expected value, stakeholders,
+      proposed analytical solution, ownership and delivery context.
+
+    blocking: true
+
+    requirements:
+
+      # ------------------------------------------------------
+      # USE CASE DEFINITION
+      # ------------------------------------------------------
+
+      - id: "use_case_definition"
+
+        name: "Use Case Definition"
+
+        reader_label: "Use Case Definition"
+
+        type: "document"
+
+        requirement: "required"
+
+        blocking: true
+
+        purpose: >
+          Document why the project exists, the problem being addressed,
+          the boundaries of Stage 1, expected value, stakeholders and
+          success criteria.
+
+        expected_content:
+          - "project or use-case name"
+          - "business problem or opportunity"
+          - "decision or action supported"
+          - "scope"
+          - "out-of-scope items where known"
+          - "expected business value"
+          - "end users"
+          - "key stakeholders"
+          - "business or product ownership"
+          - "technical ownership"
+          - "success criteria"
+
+        missing_evidence_behaviour: "PENDING"
+
+
+      # ------------------------------------------------------
+      # SOLUTION DESIGN
+      # ------------------------------------------------------
+
+      - id: "solution_design"
+
+        name: "Solution Design"
+
+        reader_label: "Solution Design"
+
+        type: "document"
+
+        requirement: "required"
+
+        blocking: true
+
+        purpose: >
+          Describe the proposed analytical or modelling solution,
+          including data, technical approach, outputs, assumptions,
+          dependencies, risks and success measures.
+
+        expected_content:
+          - "problem type"
+          - "proposed analytical or modelling approach"
+          - "data sources"
+          - "important inputs"
+          - "target variable where applicable"
+          - "model or analytical outputs"
+          - "success measures"
+          - "technical assumptions"
+          - "dependencies"
+          - "known risks"
+          - "limitations"
+          - "production considerations where applicable"
+
+        missing_evidence_behaviour: "PENDING"
+
+
+      # ------------------------------------------------------
+      # DELIVERY EPIC / MILESTONE
+      # ------------------------------------------------------
+
+      - id: "delivery_epic"
+
+        name: "Epic / Milestone"
+
+        reader_label: "Delivery Tracking"
+
+        type: "document"
+
+        requirement: "required"
+
+        blocking: true
+
+        purpose: >
+          Confirm that the use case is connected to an agreed delivery
+          mechanism such as an epic, roadmap item, project milestone or
+          equivalent tracking record.
+
+        expected_content:
+          - "project or use-case name"
+          - "epic, milestone or roadmap reference"
+          - "delivery owner where available"
+          - "status"
+          - "link or location where available"
+
+        missing_evidence_behaviour: "PENDING"
+
+
+      # ------------------------------------------------------
+      # BUSINESS REVIEW
+      # ------------------------------------------------------
+
+      - id: "business_review"
+
+        name: "Business Review Completed"
+
+        reader_label: "Business Review"
+
+        type: "governance_check"
+
+        requirement: "required"
+
+        blocking: true
+
+        purpose: >
+          Confirm that appropriate business stakeholders have reviewed
+          the use case and accepted the proposed business direction.
+
+        completion_evidence:
+          - "business reviewer or accountable stakeholder"
+          - "review outcome"
+          - "approval or acceptance status"
+          - "review date where available"
+          - "explicit review or approval evidence"
+
+        prohibited_inference:
+          - "stakeholder names alone do not prove approval"
+          - "document completion does not prove approval"
+          - "project activity does not prove business acceptance"
+
+        missing_evidence_behaviour: "PENDING"
+
+        human_decision_required: true
+
+
+      # ------------------------------------------------------
+      # TECHNICAL REVIEW
+      # ------------------------------------------------------
+
+      - id: "technical_review"
+
+        name: "Technical Review Completed"
+
+        reader_label: "Technical Review"
+
+        type: "governance_check"
+
+        requirement: "conditional"
+
+        blocking: true
+
+        condition: >
+          Applies where formal technical review is required under the
+          applicable DSLC process or project governance arrangements.
+
+        purpose: >
+          Confirm that appropriate technical stakeholders have reviewed
+          the proposed technical approach.
+
+        completion_evidence:
+          - "technical reviewer"
+          - "review status"
+          - "review outcome"
+          - "technical feedback where applicable"
+          - "explicit review evidence"
+
+        prohibited_inference:
+          - "completed code does not prove technical review"
+          - "a working notebook does not prove technical review"
+          - "production use does not prove technical review"
+
+        missing_evidence_behaviour: "PENDING"
+
+        human_decision_required: true
+
+
+      # ------------------------------------------------------
+      # AI INVENTORY
+      # ------------------------------------------------------
+
+      - id: "ai_inventory"
+
+        name: "AI Inventory Updated"
+
+        reader_label: "AI Inventory Registration"
+
+        type: "governance_check"
+
+        requirement: "required"
+
+        blocking: true
+
+        purpose: >
+          Confirm whether the model or AI use case has been registered
+          in the organisation's AI governance inventory as required.
+
+        completion_evidence:
+          - "model or use-case name"
+          - "AI Inventory registration reference or ID"
+          - "registration status"
+          - "registered owner where applicable"
+          - "explicit registration evidence"
+
+        prohibited_inference:
+          - "model existence does not prove registration"
+          - "production deployment does not prove registration"
+          - "README references do not prove registration"
+
+        missing_evidence_behaviour: "PENDING"
+
+        human_decision_required: true
+
+
+  # ==========================================================
+  # STEP 1B — DATA EXPLORATION & PREPARATION
+  # ==========================================================
+
+  - id: "step_1b"
+
+    name: "Data Exploration & Preparation"
+
+    reader_label: "Data Readiness & Governance"
+
+    purpose: >
+      Assess whether the required data is suitable, understood,
+      documented and appropriately governed for the proposed use case.
+
+    blocking: true
+
+    requirements:
+
+      # ------------------------------------------------------
+      # DATA GOVERNANCE
+      # ------------------------------------------------------
+
+      - id: "data_governance"
+
+        name: >
+          Data Processed in Accordance with Data Governance Guidelines
+
+        reader_label: "Data Governance"
+
+        type: "governance_check"
+
+        requirement: "required"
+
+        blocking: true
+
+        purpose: >
+          Confirm that project data is being used in accordance with
+          relevant organisational Data Governance requirements.
+
+        completion_evidence:
+          - "datasets used"
+          - "purpose of data use"
+          - "data ownership where available"
+          - "governance review or approval evidence"
+          - "access considerations"
+          - "privacy considerations where relevant"
+          - "Data Steward or governance review where applicable"
+
+        prohibited_inference:
+          - "technical access does not equal governance approval"
+          - "dataset presence in a notebook does not prove authorised use"
+
+        missing_evidence_behaviour: "PENDING"
+
+        human_decision_required: true
+
+
+      # ------------------------------------------------------
+      # DATA CAPTURED IN SOLUTION DESIGN
+      # ------------------------------------------------------
+
+      - id: "data_in_solution_design"
+
+        name: "Data Captured in Solution Design"
+
+        reader_label: "Data Documented in Solution Design"
+
+        type: "governance_check"
+
+        requirement: "required"
+
+        blocking: true
+
+        purpose: >
+          Confirm that the data actually used by the solution is
+          represented accurately in the Solution Design.
+
+        completion_evidence:
+          - "data sources"
+          - "important fields or features"
+          - "target variable where applicable"
+          - "data-quality considerations"
+          - "data usage considerations"
+          - "governance considerations"
+
+        missing_evidence_behaviour: "PENDING"
+
+
+      # ------------------------------------------------------
+      # DATA SHARED WITH DEPLOYMENT TEAM
+      # ------------------------------------------------------
+
+      - id: "data_shared_with_deployment"
+
+        name: "Data Shared with Deployment Team"
+
+        reader_label: "Deployment Data Handover"
+
+        type: "governance_check"
+
+        requirement: "conditional"
+
+        blocking: true
+
+        condition: >
+          Applies when production deployment, operationalisation or
+          formal handover to a deployment or MLOps team is required.
+
+        purpose: >
+          Confirm that teams responsible for deployment understand
+          the datasets, interfaces and data requirements needed for
+          operational use.
+
+        completion_evidence:
+          - "production or deployment status"
+          - "deployment or MLOps team"
+          - "datasets or interfaces shared"
+          - "handover record or evidence"
+          - "data requirements communicated"
+
+        not_applicable_rule: >
+          May be marked NOT APPLICABLE where there is verified evidence
+          that Stage 1 is limited to Proof of Value and no production or
+          deployment handover is currently required.
+
+        missing_evidence_behaviour: "PENDING"
+
+        human_review_required_for_na: true
+
+
+  # ==========================================================
+  # STEP 1C — EXPLORATORY DATA ANALYSIS
+  # ==========================================================
+
+  - id: "step_1c"
+
+    name: "Exploratory Data Analysis"
+
+    reader_label: "Exploratory Data Analysis"
+
+    purpose: >
+      Understand data characteristics, distributions, relationships,
+      quality issues, risks and implications for subsequent modelling.
+
+    blocking: true
+
+    requirements:
+
+      # ------------------------------------------------------
+      # EDA REPORT
+      # ------------------------------------------------------
+
+      - id: "eda_report"
+
+        name: "EDA Report"
+
+        reader_label: "Exploratory Data Analysis"
+
+        type: "document"
+
+        requirement: "required"
+
+        blocking: true
+
+        purpose: >
+          Provide evidence that the project data was explored and that
+          important findings were understood before feature engineering
+          and modelling.
+
+        expected_content:
+          - "dataset overview"
+          - "record and feature overview where available"
+          - "data-quality findings"
+          - "missing values where relevant"
+          - "duplicate or invalid data where relevant"
+          - "important distributions"
+          - "relationships between important variables"
+          - "target distribution where applicable"
+          - "class balance where applicable"
+          - "outliers where relevant"
+          - "key analytical insights"
+          - "data risks"
+          - "modelling implications"
+
+        missing_evidence_behaviour: "PENDING"
+
+
+      # ------------------------------------------------------
+      # STAKEHOLDER PRESENTATION
+      # ------------------------------------------------------
+
+      - id: "stakeholder_presentation"
+
+        name: "Stakeholder Presentation"
+
+        reader_label: "Stakeholder Presentation"
+
+        type: "document"
+
+        requirement: "optional"
+
+        # IMPORTANT:
+        # The supplied DSLC YAML marks this item as optional while
+        # also setting blocking=true. Preserve the source behaviour
+        # until confirmed with the DSLC owner.
+        blocking: true
+
+        source_consistency_note: >
+          The source Stage 1 configuration marks Stakeholder Presentation
+          as optional while also marking it as blocking. This apparent
+          inconsistency must not be silently changed by the agent and
+          should be confirmed with the DSLC owner before the underlying
+          governance rule is modified.
+
+        purpose: >
+          Provide a stakeholder-friendly summary of important EDA
+          findings where a separate presentation is useful.
+
+
+  # ==========================================================
+  # STEP 1D — FEATURE ENGINEERING
+  # ==========================================================
+
+  - id: "step_1d"
+
+    name: "Feature Engineering"
+
+    reader_label: "Feature Engineering"
+
+    purpose: >
+      Document how raw project data was transformed into suitable,
+      reproducible and explainable modelling features.
+
+    blocking: true
+
+    requirements:
+
+      # ------------------------------------------------------
+      # FEATURE ENGINEERING REPORT
+      # ------------------------------------------------------
+
+      - id: "feature_engineering_report"
+
+        name: "Feature Engineering Report"
+
+        reader_label: "Feature Engineering"
+
+        type: "document"
+
+        requirement: "required"
+
+        blocking: true
+
+        purpose: >
+          Document the transformations and engineering decisions used
+          to create the modelling feature set.
+
+        expected_content:
+          - "original or raw features"
+          - "created or derived features"
+          - "removed features where applicable"
+          - "missing-value handling"
+          - "categorical encoding where applicable"
+          - "scaling or normalisation where applicable"
+          - "transformations"
+          - "aggregations"
+          - "feature-selection process"
+          - "target leakage considerations"
+          - "rationale for important feature decisions"
+
+        missing_evidence_behaviour: "PENDING"
+
+
+      # ------------------------------------------------------
+      # FEATURE ENGINEERING QUALITY CHECK
+      # ------------------------------------------------------
+
+      - id: "feature_engineering_best_practice"
+
+        name: "Feature Engineering Best Practices Followed"
+
+        reader_label: "Feature Engineering Quality Check"
+
+        type: "governance_check"
+
+        requirement: "required"
+
+        blocking: true
+
+        purpose: >
+          Confirm that feature engineering decisions are relevant,
+          reproducible, appropriately documented and technically sound.
+
+        completion_evidence:
+          - "feature relevance"
+          - "documented transformations"
+          - "reproducible preprocessing"
+          - "target leakage consideration"
+          - "feature-quality checks"
+          - "feature removal rationale where applicable"
+          - "engineering rationale"
+
+        prohibited_inference:
+          - "existence of a feature-engineering notebook alone does not prove best practice"
+
+        missing_evidence_behaviour: "PENDING"
+
+
+  # ==========================================================
+  # STEP 1E — MODEL TRAINING, EVALUATION & VALIDATION
+  # ==========================================================
+
+  - id: "step_1e"
+
+    name: "Model Training, Evaluation & Validation"
+
+    reader_label: "Model Training, Evaluation & Validation"
+
+    purpose: >
+      Demonstrate that model development, evaluation and validation
+      were performed using an evidence-based, reproducible and
+      appropriately reviewed process.
+
+    blocking: true
+
+    requirements:
+
+      # ------------------------------------------------------
+      # MODELLING REPORT
+      # ------------------------------------------------------
+
+      - id: "modelling_report"
+
+        name: "Modelling Report"
+
+        reader_label: "Model Development & Evaluation"
+
+        type: "document"
+
+        requirement: "required"
+
+        blocking: true
+
+        purpose: >
+          Provide a technical record of model development,
+          experimentation, evaluation and model selection.
+
+        expected_content:
+          - "modelling objective"
+          - "analytical approach"
+          - "candidate models where applicable"
+          - "training methodology"
+          - "training and evaluation datasets"
+          - "feature set"
+          - "hyperparameter optimisation where applicable"
+          - "evaluation metrics"
+          - "model comparison where applicable"
+          - "model-selection rationale"
+          - "final model"
+          - "known limitations"
+          - "reproducibility considerations"
+
+        missing_evidence_behaviour: "PENDING"
+
+
+      # ------------------------------------------------------
+      # MODEL CARD
+      # ------------------------------------------------------
+
+      - id: "model_card"
+
+        name: "Model Card"
+
+        reader_label: "Model Card"
+
+        type: "document"
+
+        requirement: "required"
+
+        blocking: true
+
+        purpose: >
+          Provide a concise governance and technical summary of the
+          final model and its intended use.
+
+        expected_content:
+          - "model name"
+          - "model purpose"
+          - "business use"
+          - "intended users"
+          - "intended use"
+          - "inputs"
+          - "outputs"
+          - "model approach"
+          - "training data summary"
+          - "performance"
+          - "validation"
+          - "known limitations"
+          - "known risks"
+          - "bias and fairness considerations where relevant"
+          - "ownership"
+
+        missing_evidence_behaviour: "PENDING"
+
+
+      # ------------------------------------------------------
+      # MODELLING QUALITY CHECK
+      # ------------------------------------------------------
+
+      - id: "modelling_best_practice"
+
+        name: "Modelling Best Practices Followed"
+
+        reader_label: "Modelling Quality Check"
+
+        type: "governance_check"
+
+        requirement: "required"
+
+        blocking: true
+
+        purpose: >
+          Confirm that modelling followed suitable practices for
+          evaluation, validation, reproducibility and technical review.
+
+        completion_evidence:
+          - "appropriate model evaluation"
+          - "validation evidence"
+          - "reproducibility evidence"
+          - "documented experimentation"
+          - "model-selection rationale"
+          - "peer or technical review where required"
+
+        prohibited_inference:
+          - "good performance does not prove best practice"
+          - "production deployment does not prove peer review"
+          - "notebook completion does not prove validation"
+
+        missing_evidence_behaviour: "PENDING"
+
+
+  # ==========================================================
+  # QA & SIGN-OFF
+  # ==========================================================
+
+  - id: "step_1qa"
+
+    name: "QA & Sign-off"
+
+    reader_label: "QA & Sign-off"
+
+    purpose: >
+      Confirm that Stage 1 outputs have been validated and that required
+      technical, business and final reviews have been completed.
+
+    blocking: true
+
+    requirements:
+
+      # ------------------------------------------------------
+      # MODEL HANDOVER
+      # ------------------------------------------------------
+
+      - id: "model_handover"
+
+        name: "Model Handover"
+
+        reader_label: "Model Handover"
+
+        type: "document"
+
+        requirement: "conditional"
+
+        blocking: true
+
+        condition: >
+          Required where the model or analytical solution will move
+          toward production deployment, operational ownership or formal
+          handover to another team.
+
+        purpose: >
+          Provide sufficient technical and operational information for
+          another team to understand, deploy, operate or maintain the
+          model where applicable.
+
+        expected_content:
+          - "model location"
+          - "model artefacts"
+          - "dependencies"
+          - "input requirements"
+          - "output requirements"
+          - "scoring process"
+          - "deployment requirements"
+          - "operational interface"
+          - "ownership"
+          - "known limitations"
+          - "operational considerations"
+
+        not_applicable_rule: >
+          May be marked NOT APPLICABLE where verified project evidence
+          confirms that no production or operational handover is
+          currently planned.
+
+        missing_evidence_behaviour: "PENDING"
+
+        human_review_required_for_na: true
+
+
+      # ------------------------------------------------------
+      # VALIDATION NOTEBOOK
+      # ------------------------------------------------------
+
+      - id: "validation_notebook"
+
+        name: "Validation Notebook"
+
+        reader_label: "Validation Evidence"
+
+        type: "document"
+
+        requirement: "required"
+
+        blocking: true
+
+        purpose: >
+          Provide reproducible evidence showing how final model
+          performance and scoring behaviour were independently or
+          appropriately validated.
+
+        expected_content:
+          - "validation methodology"
+          - "validation dataset"
+          - "holdout, out-of-time or other validation approach"
+          - "final validation metrics"
+          - "comparison with training or earlier evaluation where relevant"
+          - "reproducibility evidence"
+          - "scoring verification where applicable"
+          - "validation limitations"
+
+        missing_evidence_behaviour: "PENDING"
+
+
+      # ------------------------------------------------------
+      # TECHNICAL SIGN-OFF
+      # ------------------------------------------------------
+
+      - id: "technical_signoff"
+
+        name: "Technical Sign-off"
+
+        reader_label: "Technical Sign-off"
+
+        type: "governance_check"
+
+        requirement: "required"
+
+        blocking: true
+
+        purpose: >
+          Confirm that the appropriate technical reviewer or authority
+          accepts the Stage 1 technical work.
+
+        completion_evidence:
+          - "technical reviewer"
+          - "review outcome"
+          - "approval status"
+          - "explicit technical approval evidence"
+
+        prohibited_inference:
+          - "successful validation does not equal technical sign-off"
+          - "production use does not equal technical sign-off"
+          - "completed documentation does not equal technical sign-off"
+
+        missing_evidence_behaviour: "PENDING"
+
+        human_decision_required: true
+
+
+      # ------------------------------------------------------
+      # BUSINESS SIGN-OFF
+      # ------------------------------------------------------
+
+      - id: "business_signoff"
+
+        name: "Business Sign-off"
+
+        reader_label: "Business Sign-off"
+
+        type: "governance_check"
+
+        requirement: "required"
+
+        blocking: true
+
+        purpose: >
+          Confirm that the appropriate business stakeholder or
+          accountable owner accepts the Stage 1 outputs.
+
+        completion_evidence:
+          - "business reviewer or accountable stakeholder"
+          - "review outcome"
+          - "acceptance decision"
+          - "explicit business approval evidence"
+
+        prohibited_inference:
+          - "business value does not equal business approval"
+          - "stakeholder participation does not equal business approval"
+          - "production use does not equal business approval"
+
+        missing_evidence_behaviour: "PENDING"
+
+        human_decision_required: true
+
+
+      # ------------------------------------------------------
+      # FINAL SIGN-OFF
+      # ------------------------------------------------------
+
+      - id: "final_signoff"
+
+        name: "Final Sign-off"
+
+        reader_label: "Final Stage 1 Sign-off"
+
+        type: "governance_check"
+
+        requirement: "required"
+
+        blocking: true
+
+        purpose: >
+          Confirm formally that all applicable Stage 1 requirements,
+          documents, governance checks and approvals are satisfactorily
+          complete.
+
+        completion_rule: >
+          May be marked COMPLETE only when all applicable required
+          blocking Stage 1 requirements are complete with sufficient
+          supporting evidence and explicit final approval evidence exists.
+
+        completion_evidence:
+          - "completion of all applicable required Stage 1 requirements"
+          - "technical sign-off"
+          - "business sign-off"
+          - "explicit final approval evidence"
+
+        prohibited_inference:
+          - "the agent cannot provide final approval"
+          - "technical and business completion alone do not prove final sign-off"
+
+        missing_evidence_behaviour: "PENDING"
+
+        human_decision_required: true
+
+
+# ============================================================
+# CROSS-STAGE GOVERNANCE REQUIREMENTS
+# ============================================================
+
+cross_stage_requirements:
+
+  evidence_traceability:
+
+    required: true
+
+    description: >
+      Major Stage 1 statements, statuses and governance conclusions
+      should be traceable to project evidence.
+
+    final_output: "Evidence Register"
+
+
+  risks_and_limitations:
+
+    required: true
+
+    description: >
+      Known technical, data, business, operational and governance risks
+      or limitations should be captured where supported by project
+      evidence.
+
+    risk_acceptance_rule: >
+      The agent may identify and summarise risks but may mark a risk as
+      RISK ACCEPTED only when explicit human risk-acceptance evidence
+      exists.
+
+
+  governance_summary:
+
+    required: true
+
+    description: >
+      The final Stage 1 document should summarise completed governance
+      activities, outstanding gaps and overall readiness without
+      independently providing governance approval.
+
+
+  recommended_next_actions:
+
+    required: true
+
+    description: >
+      Outstanding required items, missing evidence and pending approvals
+      should be converted into specific evidence-based next actions.
+
+    generation_rule: >
+      Recommended actions must be derived from identified Stage 1 gaps
+      and must not be unrelated AI-generated project advice.
+
+
+# ============================================================
+# AGENT INTERPRETATION RULES
+# ============================================================
+
+agent_rules:
+
+  evidence_before_status: true
+
+  evidence_before_questions: true
+
+  do_not_invent_project_facts: true
+
+  do_not_invent_approvals: true
+
+  do_not_invent_metrics: true
+
+  do_not_accept_risk: true
+
+  do_not_provide_signoff: true
+
+  reference_examples_are_not_project_evidence: true
+
+  templates_are_not_project_evidence: true
+
+  general_knowledge_is_not_project_evidence: true
+
+  conflicts_must_be_flagged: true
+
+  missing_required_evidence_status: "PENDING"
+
+  generated_document_status: "DRAFT"
+
+  final_human_review_required: true
