@@ -108,6 +108,4 @@ The agent follows an evidence-first approach.
 - Example documents are used for structure only, never as project evidence.
 - Governance approval and sign-off are never inferred.
 
-All generated Stage 1 documentation and Model Cards remain **drafts for human review**.
-
 All generated Stage 1 documentation and Model Cards remain **DRAFTS for human review** unless verified approval evidence demonstrates otherwise.
