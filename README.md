@@ -1,68 +1,86 @@
-# DSLC Stage 1 Documentation Agent
+# DSLC Documentation Agent
 
-## Purpose
+Evidence-based documentation agent for generating **Stage 1 DSLC documentation** and **Model Cards** from existing Data Science project evidence.
 
-Generates a draft **DSLC Stage 1 document** from existing project evidence.
+The agent reviews available project evidence, identifies gaps and generates draft documentation for human review.
 
-The agent reviews available evidence, assesses Stage 1 requirements, identifies gaps and produces a structured document for human review.
-
-## What You Need
-
-Provide the project evidence available for the project, such as:
-
-- Project README
-- Project / modelling notebooks
-- EDA
-- Use Case Shaping documentation
-
-Where available, the agent can also use supporting evidence such as validation, solution design and governance documentation.
-
-You do not need to manually provide GitHub links for evidence stored in a Git repository.
-
+It does not invent missing information or provide governance approval.
+---
 ## Requirements
 
 - VS Code
 - GitHub Copilot
 - Python 3.x
-- Git, where repository evidence links are required
+- Git
 
-## How to Use
+Make the relevant Data Science project and its evidence available in the VS Code workspace.
 
-1. Open the repository in VS Code.
+Evidence may include:
 
-2. Make the relevant project evidence available in the workspace.
+- project README;
+- modelling, training, validation or scoring notebooks;
+- EDA;
+- Use Case Shaping;
+- Solution Design;
+- governance or approved business documentation.
+---
+## Workflow 1 — Stage 1 DSLC
 
-3. Open GitHub Copilot Chat.
+Ask GitHub Copilot:
 
-4. Ask:
+> **Generate the Stage 1 DSLC documentation.**
 
-   **`Generate the Stage 1 DSLC documentation.`**
+The agent reviews the available project evidence, assesses the Stage 1 requirements and identifies missing or conflicting evidence.
 
-5. Respond to any targeted questions where required information cannot be verified from the available evidence.
+It generates:
 
-6. Review the generated Stage 1 document before approval or sign-off.
-
-## Output
-
-Generated outputs include:
-
+- `stage1_draft.md`;
 - editable DOCX;
-- PDF review copy, where available.
-
-The document includes:
-
+- PDF review copy, where available;
 - Stage 1 Readiness Dashboard;
-- Table of Contents and document navigation;
-- detailed Stage 1 assessment;
-- Evidence Register;
-- verified evidence links or locations where available.
+- Evidence Register with verified evidence locations.
 
-## Important
+The Markdown output is designed to remain portable for review and use in tools such as Confluence.
+---
+## Workflow 2 — Model Card
 
-The agent does not invent missing project evidence or provide governance approval.
+Ask GitHub Copilot:
 
-Missing or unverifiable information is made visible for human review.
+> **Generate a Model Card for this project.**
 
-Evidence links are created only where they can be safely verified. If a link cannot be verified, the agent uses a verified file location where possible rather than guessing a URL.
+The agent uses verified project evidence to populate the Model Card and identifies unsupported fields as `PENDING`.
 
-All generated Stage 1 documentation remains a **DRAFT for human review**.
+It generates:
+
+- structured Model Card data;
+- HTML Model Card;
+- PDF where supported;
+- Evidence Summary;
+- Missing Fields;
+- Recommended Actions.
+- 
+### Explainability
+
+To populate the explainability section, the project must contain at least one valid explainability artefact:
+
+- SHAP summary plot;
+- feature-importance plot;
+- verified numeric feature-importance table;
+- user-provided PNG or JPG explainability graphic.
+
+If multiple valid artefacts are available and none has been selected, the agent will request a selection.
+
+If no valid explainability evidence is available, the section remains `PENDING`.
+
+**The agent will not create, infer or invent explainability values.**
+---
+## Evidence & Governance
+
+The agent follows an evidence-first approach.
+
+- Missing or unverifiable information remains visible as `PENDING`.
+- Evidence links are used only where they can be safely verified.
+- Example documents are used for structure only, never as project evidence.
+- Governance approval and sign-off are never inferred.
+
+All generated Stage 1 documentation and Model Cards remain **DRAFTS for human review** unless verified approval evidence demonstrates otherwise.
